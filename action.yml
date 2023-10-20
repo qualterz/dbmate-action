@@ -1,16 +1,20 @@
 # action.yml
-name: 'Dbmate action'
+name: 'Dbmate Action'
 branding:
   icon: 'archive'
   color: 'gray-dark'
 description: 'Run Dbmate database migration tool'
 inputs:
+  version:
+    description: 'Dbmate version'
+    required: false
+    default: latest
   command:
     description: 'Dbmate command to run'
     required: false
     default: '--help'
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/amacneil/dbmate:1.15'
+  image: 'docker://ghcr.io/amacneil/dbmate:${{ inputs.version }}'
   args:
     - ${{ inputs.command }}
